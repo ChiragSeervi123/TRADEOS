@@ -1,4 +1,4 @@
-from app.routers import auth, imports, organizations, parties, products
+from app.routers import auth, fulfilment, imports, inventory, orders, organizations, parties, products
 
 ROUTERS = [
     auth.router,
@@ -6,4 +6,7 @@ ROUTERS = [
     products.router,
     parties.router,
     imports.router,
+    inventory.router,
+    orders.router,
+    fulfilment.router,
 ]

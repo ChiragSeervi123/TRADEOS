@@ -112,6 +112,8 @@ class Order(IdMixin, TimestampMixin, OrgScoped, Base):
     approved_at: Mapped[datetime | None] = mapped_column(UTCDateTime)
     dispatched_at: Mapped[datetime | None] = mapped_column(UTCDateTime)
     delivered_at: Mapped[datetime | None] = mapped_column(UTCDateTime)
+    # Set when remaining (undispatched) quantities are closed short; reservation released.
+    fulfilment_closed_at: Mapped[datetime | None] = mapped_column(UTCDateTime)
     revision: Mapped[int] = mapped_column(Integer, default=1)
     version: Mapped[int] = mapped_column(Integer, default=1)
     is_synthetic: Mapped[bool] = mapped_column(Boolean, default=False)
@@ -190,7 +192,9 @@ class PickListLine(IdMixin, OrgScoped, Base):
     pick_list_id: Mapped[uuid.UUID] = mapped_column(
         Uuid, ForeignKey("pick_lists.id"), index=True
     )
-    order_line_id: Mapped[uuid.UUID] = mapped_column(Uuid, ForeignKey("order_lines.id"))
+    # Nullable: if a draft order's lines are replaced after an amendment, the cancelled
+    # pick list keeps its own product/qty/batch history and the link is cleared.
+    order_line_id: Mapped[uuid.UUID | None] = mapped_column(Uuid, ForeignKey("order_lines.id", ondelete="SET NULL"))
     line_no: Mapped[int] = mapped_column(Integer)
     product_id: Mapped[uuid.UUID] = mapped_column(Uuid, ForeignKey("products.id"))
     batch_id: Mapped[uuid.UUID | None] = mapped_column(Uuid, ForeignKey("batches.id"))
