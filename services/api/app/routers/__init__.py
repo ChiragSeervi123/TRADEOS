@@ -9,6 +9,7 @@ from app.routers import (
     organizations,
     parties,
     products,
+    schemes,
 )
 
 ROUTERS = [
@@ -22,4 +23,5 @@ ROUTERS = [
     fulfilment.router,
     inbox.router,
     documents.router,
+    schemes.router,
 ]

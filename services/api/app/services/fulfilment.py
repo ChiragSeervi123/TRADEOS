@@ -35,7 +35,7 @@ from app.services.orders import add_event
 
 def create_pick_list(ctx, order: Order) -> PickList | None:
     """Pick list for all undispatched quantities, batches suggested FEFO."""
-    remaining = [(l, qty(l.base_quantity - l.dispatched_quantity)) for l in order.lines if l.product_id and l.base_quantity > l.dispatched_quantity]
+    remaining = [(l, qty(l.base_quantity - (l.dispatched_quantity or ZERO))) for l in order.lines if l.product_id and l.base_quantity > (l.dispatched_quantity or ZERO)]
     if not remaining:
         return None
     pl = PickList(

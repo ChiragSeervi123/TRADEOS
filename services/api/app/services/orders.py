@@ -200,12 +200,10 @@ def price_order(db, order: Order, retailer: Retailer) -> dict:
         rules,
         free_prices,
     )
-    by_no = {l.line_no: l for l in lines}
     for l in lines:
         if l.product_id in products and l.gross_amount:
             l.scheme_discount = result.line_discount(l.line_no)
     next_no = max([l.line_no for l in lines], default=0) + 1
-    order.lines  # noqa: B018
     for b in result.applied:
         db.add(
             SchemeApplication(
@@ -244,6 +242,7 @@ def price_order(db, order: Order, retailer: Retailer) -> dict:
                 )
             )
             next_no += 1
+    db.flush()  # apply column defaults to regenerated free-goods lines
     for l in lines:
         if l.product_id not in products or l.gross_amount == ZERO and l.unit_price == ZERO:
             continue
@@ -259,7 +258,6 @@ def price_order(db, order: Order, retailer: Retailer) -> dict:
     order.net_total = money(sum((l.line_total for l in all_lines), ZERO))
     if result.skipped:
         issues.append({"code": "SCHEMES_NOT_APPLIED", "severity": "info", "message": f"{len(result.skipped)} active scheme(s) did not apply.", "details": {"skipped": result.skipped}})
-    del by_no
     return {"issues": issues}
 
 
