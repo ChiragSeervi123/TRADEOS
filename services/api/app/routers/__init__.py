@@ -1,6 +1,8 @@
 from app.routers import (
     auth,
     documents,
+    exceptions,
+    finance,
     fulfilment,
     imports,
     inbox,
@@ -9,6 +11,7 @@ from app.routers import (
     organizations,
     parties,
     products,
+    reconciliation,
     schemes,
 )
 
@@ -24,4 +27,7 @@ ROUTERS = [
     inbox.router,
     documents.router,
     schemes.router,
+    finance.router,
+    reconciliation.router,
+    exceptions.router,
 ]
