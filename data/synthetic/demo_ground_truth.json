@@ -1,0 +1,101 @@
+{
+  "note": "SYNTHETIC demo anomalies with ground-truth labels (seed 42).",
+  "organization": "demo-distributor",
+  "scale": "full",
+  "generated_at": "2026-11-05T11:00:12.287022+00:00",
+  "scenarios": [
+    {
+      "scenario": "credit_limit_breach_setup",
+      "retailer": "R-0002",
+      "credit_limit": "5000"
+    },
+    {
+      "scenario": "inventory_adjustment_with_reason",
+      "sku": "SUNR-BRI-004",
+      "reason": "Water damage in storage"
+    },
+    {
+      "scenario": "expired_stock",
+      "sku": "SUNR-BRI-006",
+      "batch": "EXP-OLD"
+    },
+    {
+      "scenario": "valid_quantity_scheme",
+      "scheme": "BW-SLAB"
+    },
+    {
+      "scenario": "ineligible_scheme",
+      "scheme": "CR-NORTH",
+      "rule": "only North territory retailers qualify"
+    },
+    {
+      "scenario": "duplicate_order",
+      "orders": [
+        "SO-001051",
+        "SO-001052"
+      ]
+    },
+    {
+      "scenario": "insufficient_stock",
+      "order": "SO-001053",
+      "sku": "SUNR-BRI-004"
+    },
+    {
+      "scenario": "credit_limit_breach",
+      "order": "SO-001054",
+      "retailer": "R-0002"
+    },
+    {
+      "scenario": "partial_payment",
+      "invoice": "INV-000003",
+      "paid": "8477.10",
+      "total": "21192.76"
+    },
+    {
+      "scenario": "unmatched_payment",
+      "payment": "PAY-UNALLOC-1"
+    },
+    {
+      "scenario": "return_awaiting_credit",
+      "return": "CR-000002"
+    },
+    {
+      "scenario": "price_mismatch",
+      "invoice": "SUNR-INV-2601",
+      "sku": "SUNR-BRI-001",
+      "agreed": "335.00",
+      "invoiced": "355.10"
+    },
+    {
+      "scenario": "quantity_mismatch",
+      "invoice": "NOVA-INV-2601",
+      "sku": "NOVA-CRU-055",
+      "received": "96",
+      "invoiced": "108"
+    },
+    {
+      "scenario": "duplicate_document",
+      "invoices": [
+        "GNGA-INV-2601",
+        "GNGA-INV-2601-A"
+      ]
+    },
+    {
+      "scenario": "missing_credit_note",
+      "claim": "CLM-000001",
+      "expected": "20792.41"
+    },
+    {
+      "scenario": "inbox_correct",
+      "source_id": "38b529b2-fafb-48a1-b72b-08ab7f1179db"
+    },
+    {
+      "scenario": "inbox_ambiguous_sku",
+      "source_id": "d8397caf-3eaf-41b0-b61c-4d74131bce34"
+    },
+    {
+      "scenario": "inbox_unknown_retailer",
+      "source_id": "f5e5de56-b848-4f1a-8c0e-0c2063859840"
+    }
+  ]
+}

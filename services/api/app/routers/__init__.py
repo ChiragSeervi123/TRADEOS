@@ -10,9 +10,11 @@ from app.routers import (
     orders,
     organizations,
     parties,
+    platform,
     products,
     reconciliation,
     schemes,
+    sharing,
 )
 
 ROUTERS = [
@@ -30,4 +32,6 @@ ROUTERS = [
     finance.router,
     reconciliation.router,
     exceptions.router,
+    platform.router,
+    sharing.router,
 ]
