@@ -25,10 +25,16 @@ class Settings(BaseSettings):
     # Jobs: "inline" runs background jobs right after the request commits (dev/tests);
     # "worker" leaves them queued for `python -m app.worker`.
     jobs_mode: str = "inline"
-    # AI provider. Without ANTHROPIC_API_KEY the deterministic demo parser is used.
+    # AI provider. Without ANTHROPIC_API_KEY the deterministic demo parser is used, and
+    # an organisation must also opt in (Organization.ai_external_enabled) before any
+    # document is sent to the external provider.
     anthropic_api_key: str | None = None
-    anthropic_model: str = "claude-sonnet-5-5"
-    ai_timeout_seconds: int = 60
+    anthropic_model: str = "claude-opus-5-5"
+    # Thinking depth for extraction calls: low | medium | high | xhigh | max.
+    anthropic_effort: str = "medium"
+    # "default" enables the API's server-side refusal fallback; "off" disables it.
+    anthropic_refusal_fallback: str = "default"
+    ai_timeout_seconds: int = 120
     auth_rate_limit_per_minute: int = 10
     enable_demo_login: bool = True
     # Create missing tables at startup. Stopgap until Alembic migrations exist: it never
