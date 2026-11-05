@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { CsvImportButton } from "@/components/csv-import";
-import { useToast } from "@/components/toast";
 import { Button, Card, DataTable, Dialog, EmptyState, ErrorState, Field, Input, Pagination, Select, Spinner } from "@/components/ui";
 import { api } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
@@ -14,7 +13,7 @@ type Item = { id: string; product_id: string; sku: string; name: string; variant
 
 export function PricingPanel() {
   const { can } = useAuth();
-  const toast = useToast();
+
   const lists = useApi<PL[]>("/price-lists");
   const [sel, setSel] = useState<string>("");
   const [q, setQ] = useState("");
@@ -77,7 +76,6 @@ export function PricingPanel() {
         </div>
         <p className="mt-2 text-xs text-muted">Assign a price list to retailers on the retailer page; otherwise the default list applies.</p>
       </Dialog>
-      {toast && null}
     </Card>
   );
 }
