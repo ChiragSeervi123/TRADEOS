@@ -11,7 +11,7 @@ from collections.abc import Iterator
 from datetime import UTC, datetime
 from decimal import Decimal
 
-from sqlalchemy import JSON, BigInteger, DateTime, Numeric, create_engine, event
+from sqlalchemy import JSON, BigInteger, DateTime, Numeric, create_engine, event, text
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, sessionmaker
 from sqlalchemy.types import TypeDecorator, Uuid
@@ -105,6 +105,9 @@ def _make_engine(url: str):
         kwargs["connect_args"] = {"check_same_thread": False, "timeout": 30}
     else:
         kwargs["pool_pre_ping"] = True
+        # No server-side prepared statements: hosted poolers (Neon, PgBouncer in
+        # transaction mode) can route consecutive statements to different backends.
+        kwargs["connect_args"] = {"prepare_threshold": None}
     eng = create_engine(url, **kwargs)
     if url.startswith("sqlite"):
 
@@ -127,6 +130,17 @@ def configure_engine(url: str) -> None:
     global engine
     engine = _make_engine(url)
     SessionLocal.configure(bind=engine)
+
+
+def create_schema() -> None:
+    """Create any missing tables (see Settings.auto_create_schema). On PostgreSQL a
+    transaction-scoped advisory lock stops simultaneous cold starts from racing."""
+    import app.models  # noqa: F401  registers every table on Base.metadata
+
+    with engine.begin() as conn:
+        if conn.dialect.name == "postgresql":
+            conn.execute(text("SELECT pg_advisory_xact_lock(727463)"))
+        Base.metadata.create_all(conn)
 
 
 def get_db() -> Iterator[Session]:

@@ -2,6 +2,7 @@ import json
 import logging
 import time
 import uuid
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -39,10 +40,18 @@ def _configure_logging():
     root.propagate = False
 
 
+@asynccontextmanager
+async def _lifespan(_app: FastAPI):
+    if get_settings().auto_create_schema:
+        dbmod.create_schema()
+    yield
+
+
 def create_app() -> FastAPI:
     _configure_logging()
     s = get_settings()
     app = FastAPI(
+        lifespan=_lifespan,
         title="TRADEOS API",
         version="0.1.0",
         description="Trade operations and financial intelligence for FMCG distributors. "
