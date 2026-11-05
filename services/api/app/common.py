@@ -2,10 +2,11 @@
 
 import hashlib
 import json
-from typing import Any, Generic, TypeVar
+from decimal import Decimal
+from typing import Annotated, Any, Generic, TypeVar
 
 from fastapi import Query
-from pydantic import BaseModel, ConfigDict
+from pydantic import AfterValidator, BaseModel, ConfigDict
 from sqlalchemy import Select, asc, desc, func, select
 from sqlalchemy.exc import IntegrityError
 
@@ -13,6 +14,23 @@ from app.errors import AppError, conflict
 from app.models import IdempotencyKey
 
 T = TypeVar("T")
+
+
+def _money(v: Decimal) -> Decimal:
+    from app.money import money
+
+    return money(v)
+
+
+def _qty(v: Decimal) -> Decimal:
+    from app.money import qty
+
+    return qty(v)
+
+
+# Input types: quantised on the way in, so responses are consistent before/after reload.
+Money = Annotated[Decimal, AfterValidator(_money)]
+Qty = Annotated[Decimal, AfterValidator(_qty)]
 
 
 class Schema(BaseModel):
