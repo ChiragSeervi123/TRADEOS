@@ -506,9 +506,13 @@ def main():
         if s.is_production or not s.is_sqlite or s.environment not in ("development", "test"):
             raise SystemExit("--reset is only allowed for a SQLite database in development/test.")
         Base.metadata.drop_all(dbmod.engine)
-    import app.models  # noqa: F401
+        from sqlalchemy import text
 
-    Base.metadata.create_all(dbmod.engine)
+        with dbmod.engine.begin() as c:
+            c.execute(text("DROP TABLE IF EXISTS alembic_version"))
+    from app.migrate import upgrade
+
+    upgrade()
     print(json.dumps(seed_demo(args.scale), indent=2, default=str))
 
 

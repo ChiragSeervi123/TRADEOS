@@ -1,8 +1,8 @@
 {
   "note": "SYNTHETIC demo anomalies with ground-truth labels (seed 42).",
   "organization": "demo-distributor",
-  "scale": "full",
-  "generated_at": "2026-11-05T11:00:12.287022+00:00",
+  "scale": "small",
+  "generated_at": "2026-11-05T11:03:42.597457+00:00",
   "scenarios": [
     {
       "scenario": "credit_limit_breach_setup",
@@ -16,7 +16,7 @@
     },
     {
       "scenario": "expired_stock",
-      "sku": "SUNR-BRI-006",
+      "sku": "SUNR-SNO-006",
       "batch": "EXP-OLD"
     },
     {
@@ -31,25 +31,25 @@
     {
       "scenario": "duplicate_order",
       "orders": [
-        "SO-001051",
-        "SO-001052"
+        "SO-000121",
+        "SO-000122"
       ]
     },
     {
       "scenario": "insufficient_stock",
-      "order": "SO-001053",
+      "order": "SO-000123",
       "sku": "SUNR-BRI-004"
     },
     {
       "scenario": "credit_limit_breach",
-      "order": "SO-001054",
+      "order": "SO-000124",
       "retailer": "R-0002"
     },
     {
       "scenario": "partial_payment",
-      "invoice": "INV-000003",
-      "paid": "8477.10",
-      "total": "21192.76"
+      "invoice": "INV-000004",
+      "paid": "4161.46",
+      "total": "10403.64"
     },
     {
       "scenario": "unmatched_payment",
@@ -69,9 +69,9 @@
     {
       "scenario": "quantity_mismatch",
       "invoice": "NOVA-INV-2601",
-      "sku": "NOVA-CRU-055",
-      "received": "96",
-      "invoiced": "108"
+      "sku": "NOVA-CRU-025",
+      "received": "48",
+      "invoiced": "60"
     },
     {
       "scenario": "duplicate_document",
@@ -83,19 +83,19 @@
     {
       "scenario": "missing_credit_note",
       "claim": "CLM-000001",
-      "expected": "20792.41"
+      "expected": "81.97"
     },
     {
       "scenario": "inbox_correct",
-      "source_id": "38b529b2-fafb-48a1-b72b-08ab7f1179db"
+      "source_id": "a0e1de96-e3d1-43ef-a243-27af392cb123"
     },
     {
       "scenario": "inbox_ambiguous_sku",
-      "source_id": "d8397caf-3eaf-41b0-b61c-4d74131bce34"
+      "source_id": "6e5dae0e-441e-4adf-96e5-d4d9fa0f44a8"
     },
     {
       "scenario": "inbox_unknown_retailer",
-      "source_id": "f5e5de56-b848-4f1a-8c0e-0c2063859840"
+      "source_id": "d0333bb9-d9b5-4ad8-b1bf-22c37e2c1d9b"
     }
   ]
 }
