@@ -1,0 +1,57 @@
+{
+  "dataset": "order_eval",
+  "version": "1.0",
+  "note": "SYNTHETIC evaluation data written for TRADEOS development. Not real customer orders. Ground truth labelled by hand. A line with sku null and expect=ambiguous/unmatched means the correct behaviour is to NOT auto-select a product.",
+  "catalog": {
+    "products": [
+      {"sku": "HUL-SURF-1KG", "name": "Surf Excel Easy Wash", "brand": "Surf Excel", "variant": "1 kg", "case": 12},
+      {"sku": "HUL-SURF-500", "name": "Surf Excel Easy Wash", "brand": "Surf Excel", "variant": "500 g", "case": 24},
+      {"sku": "HUL-RIN-1KG", "name": "Rin Detergent Powder", "brand": "Rin", "variant": "1 kg", "case": 12},
+      {"sku": "HUL-DOVE-100", "name": "Dove Cream Beauty Bar", "brand": "Dove", "variant": "100 g", "case": 48},
+      {"sku": "HUL-DOVE-75", "name": "Dove Cream Beauty Bar", "brand": "Dove", "variant": "75 g", "case": 72},
+      {"sku": "HUL-LUX-100", "name": "Lux Soap Rose", "brand": "Lux", "variant": "100 g", "case": 48},
+      {"sku": "NES-MAGGI-70", "name": "Maggi 2-Minute Noodles Masala", "brand": "Maggi", "variant": "70 g", "case": 96},
+      {"sku": "NES-MAGGI-280", "name": "Maggi 2-Minute Noodles Masala", "brand": "Maggi", "variant": "280 g", "case": 24},
+      {"sku": "TAT-SALT-1KG", "name": "Tata Salt Iodised", "brand": "Tata", "variant": "1 kg", "case": 25, "aliases": ["tata namak"]},
+      {"sku": "TAT-TEA-250", "name": "Tata Tea Premium", "brand": "Tata", "variant": "250 g", "case": 40},
+      {"sku": "BRT-GOOD-75", "name": "Britannia Good Day Cashew Biscuits", "brand": "Britannia", "variant": "75 g", "case": 60},
+      {"sku": "BRT-MARIE-250", "name": "Britannia Marie Gold Biscuits", "brand": "Britannia", "variant": "250 g", "case": 36},
+      {"sku": "COL-PASTE-150", "name": "Colgate Strong Teeth Toothpaste", "brand": "Colgate", "variant": "150 g", "case": 36},
+      {"sku": "PG-CLINIC-340", "name": "Clinic Plus Shampoo", "brand": "Clinic Plus", "variant": "340 ml", "case": 24},
+      {"sku": "PNG-TIDE-1KG", "name": "Tide Plus Detergent", "brand": "Tide", "variant": "1 kg", "case": 12},
+      {"sku": "AMU-BUTTER-100", "name": "Amul Butter Pasteurised", "brand": "Amul", "variant": "100 g", "case": 50},
+      {"sku": "PAR-GLUCO-250", "name": "Parle-G Glucose Biscuits", "brand": "Parle", "variant": "250 g", "case": 48},
+      {"sku": "FOR-ATTA-5KG", "name": "Fortune Chakki Fresh Atta", "brand": "Fortune", "variant": "5 kg", "case": 4}
+    ],
+    "retailers": [
+      {"code": "R-1001", "name": "Sharma General Store", "phone": "9876543210"},
+      {"code": "R-1002", "name": "Gupta Kirana", "phone": "9811122233"},
+      {"code": "R-1003", "name": "New Balaji Provision Stores", "phone": "9822233344"},
+      {"code": "R-1004", "name": "Sri Lakshmi Traders", "phone": "9833344455"}
+    ]
+  },
+  "cases": [
+    {"id": "clear-01", "category": "clear", "text": "Sharma General Store here\n2 case surf excel easy wash 1kg\n12 pcs dove cream bar 100g", "retailer": "R-1001", "lines": [{"sku": "HUL-SURF-1KG", "quantity": "2", "unit": "CASE"}, {"sku": "HUL-DOVE-100", "quantity": "12", "unit": "PCS"}]},
+    {"id": "clear-02", "category": "clear", "text": "From: Gupta Kirana\nTata Salt Iodised 1kg - 25 pcs\nTata Tea Premium 250g - 10 pcs", "retailer": "R-1002", "lines": [{"sku": "TAT-SALT-1KG", "quantity": "25", "unit": "PCS"}, {"sku": "TAT-TEA-250", "quantity": "10", "unit": "PCS"}]},
+    {"id": "clear-03", "category": "clear", "text": "Order from: Sri Lakshmi Traders\n1 case maggi masala 70g\n3 case parle-g 250g\n2 fortune atta 5kg", "retailer": "R-1004", "lines": [{"sku": "NES-MAGGI-70", "quantity": "1", "unit": "CASE"}, {"sku": "PAR-GLUCO-250", "quantity": "3", "unit": "CASE"}, {"sku": "FOR-ATTA-5KG", "quantity": "2", "unit": null}]},
+    {"id": "clear-04", "category": "clear", "text": "Customer: New Balaji Provision Stores\n- Colgate strong teeth 150g x 24\n- Clinic plus shampoo 340ml x 12", "retailer": "R-1003", "lines": [{"sku": "COL-PASTE-150", "quantity": "24", "unit": null}, {"sku": "PG-CLINIC-340", "quantity": "12", "unit": null}]},
+    {"id": "clear-05", "category": "clear", "text": "Sharma General Store\n5 pcs amul butter 100g\n2 case tide plus 1kg", "retailer": "R-1001", "lines": [{"sku": "AMU-BUTTER-100", "quantity": "5", "unit": "PCS"}, {"sku": "PNG-TIDE-1KG", "quantity": "2", "unit": "CASE"}]},
+    {"id": "misspell-01", "category": "misspelling", "text": "Gupta Kirana here\n2 case surf exel 1kg\n10 pcs dov soap 100gm", "retailer": "R-1002", "lines": [{"sku": "HUL-SURF-1KG", "quantity": "2", "unit": "CASE"}, {"sku": "HUL-DOVE-100", "quantity": "10", "unit": "PCS"}]},
+    {"id": "misspell-02", "category": "misspelling", "text": "From: Sharma Genral Store\nbritania good day 75gm - 2 case\nmagi noodles 280g - 6 pkt", "retailer": "R-1001", "lines": [{"sku": "BRT-GOOD-75", "quantity": "2", "unit": "CASE"}, {"sku": "NES-MAGGI-280", "quantity": "6", "unit": "PCS"}]},
+    {"id": "misspell-03", "category": "misspelling", "text": "Sri Lakshmi Traders here\n4 ctn tata namak 1 kg\n1 case colgate paste 150 gm", "retailer": "R-1004", "lines": [{"sku": "TAT-SALT-1KG", "quantity": "4", "unit": "CASE"}, {"sku": "COL-PASTE-150", "quantity": "1", "unit": "CASE"}]},
+    {"id": "abbrev-01", "category": "abbreviation", "text": "Gupta Kirana here\n3 cs rin 1kg\n2 dz lux rose 100g", "retailer": "R-1002", "lines": [{"sku": "HUL-RIN-1KG", "quantity": "3", "unit": "CASE"}, {"sku": "HUL-LUX-100", "quantity": "2", "unit": "DOZEN"}]},
+    {"id": "abbrev-02", "category": "abbreviation", "text": "From: New Balaji Provision Stores\nmarie gold 250g 1 ctn\nfortune atta 5kg 2 nos", "retailer": "R-1003", "lines": [{"sku": "BRT-MARIE-250", "quantity": "1", "unit": "CASE"}, {"sku": "FOR-ATTA-5KG", "quantity": "2", "unit": "PCS"}]},
+    {"id": "ambig-01", "category": "ambiguous", "text": "Sharma General Store here\n5 pcs dove soap", "retailer": "R-1001", "lines": [{"sku": null, "expect": "ambiguous", "quantity": "5", "unit": "PCS"}]},
+    {"id": "ambig-02", "category": "ambiguous", "text": "Gupta Kirana here\n2 case surf excel\n1 case maggi", "retailer": "R-1002", "lines": [{"sku": null, "expect": "ambiguous", "quantity": "2", "unit": "CASE"}, {"sku": null, "expect": "ambiguous", "quantity": "1", "unit": "CASE"}]},
+    {"id": "ambig-03", "category": "ambiguous", "text": "From: Sri Lakshmi Traders\n10 pcs detergent 1kg", "retailer": "R-1004", "lines": [{"sku": null, "expect": "ambiguous", "quantity": "10", "unit": "PCS"}]},
+    {"id": "similar-01", "category": "similar_sku", "text": "New Balaji Provision Stores here\n24 pcs dove cream beauty bar 75g\n6 pcs surf excel easy wash 500g", "retailer": "R-1003", "lines": [{"sku": "HUL-DOVE-75", "quantity": "24", "unit": "PCS"}, {"sku": "HUL-SURF-500", "quantity": "6", "unit": "PCS"}]},
+    {"id": "similar-02", "category": "similar_sku", "text": "Sharma General Store here\n1 case maggi masala noodles 280g\n2 case maggi masala noodles 70g", "retailer": "R-1001", "lines": [{"sku": "NES-MAGGI-280", "quantity": "1", "unit": "CASE"}, {"sku": "NES-MAGGI-70", "quantity": "2", "unit": "CASE"}]},
+    {"id": "units-01", "category": "multiple_units", "text": "Gupta Kirana here\n1 case tata tea premium 250g\n6 pcs tata tea premium 250g\n1 dozen lux soap rose 100g", "retailer": "R-1002", "lines": [{"sku": "TAT-TEA-250", "quantity": "1", "unit": "CASE"}, {"sku": "TAT-TEA-250", "quantity": "6", "unit": "PCS"}, {"sku": "HUL-LUX-100", "quantity": "1", "unit": "DOZEN"}]},
+    {"id": "units-02", "category": "multiple_units", "text": "From: Sri Lakshmi Traders\nparle g 250g - 2 boxes\namul butter 100g - 3 dz", "retailer": "R-1004", "lines": [{"sku": "PAR-GLUCO-250", "quantity": "2", "unit": "BOX"}, {"sku": "AMU-BUTTER-100", "quantity": "3", "unit": "DOZEN"}]},
+    {"id": "missing-01", "category": "missing_fields", "text": "2 case surf excel easy wash 1kg\n12 pcs tata salt 1kg", "retailer": null, "lines": [{"sku": "HUL-SURF-1KG", "quantity": "2", "unit": "CASE"}, {"sku": "TAT-SALT-1KG", "quantity": "12", "unit": "PCS"}]},
+    {"id": "missing-02", "category": "missing_fields", "text": "From: Unknown Supermart\nsurf excel 1kg\nsome biscuits", "retailer": null, "lines": [{"sku": "HUL-SURF-1KG", "quantity": null, "unit": null}]},
+    {"id": "phone-01", "category": "retailer_by_phone", "text": "msg from 98765 43210\n3 case rin detergent 1kg", "retailer": "R-1001", "lines": [{"sku": "HUL-RIN-1KG", "quantity": "3", "unit": "CASE"}]},
+    {"id": "hinglish-01", "category": "hinglish", "text": "Namaste bhaiya, Gupta Kirana se\n2 peti surf excel 1kg\ntata namak 1kg 25 pcs bhej dena\nkal tak", "retailer": "R-1002", "lines": [{"sku": "HUL-SURF-1KG", "quantity": "2", "unit": "CASE"}, {"sku": "TAT-SALT-1KG", "quantity": "25", "unit": "PCS"}]},
+    {"id": "unknown-sku-01", "category": "unknown_product", "text": "Sharma General Store here\n5 case coca cola 2l\n2 case surf excel easy wash 1kg", "retailer": "R-1001", "lines": [{"sku": null, "expect": "unmatched", "quantity": "5", "unit": "CASE"}, {"sku": "HUL-SURF-1KG", "quantity": "2", "unit": "CASE"}]}
+  ]
+}
